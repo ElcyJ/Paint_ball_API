@@ -1,4 +1,7 @@
 from django.db import models
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 class Map(models.Model):
@@ -20,14 +23,14 @@ class Team(models.Model):
 
 
 class Gun(models.Model):
-    number = models.IntegerField()
+    number = models.CharField(max_length=4)
     ammunition = models.IntegerField()
     range = models.IntegerField()
 
 
 class Player(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="player")
     name = models.CharField(max_length=255)
-    password = models.CharField(max_length=255)
     localization_x = models.IntegerField()
     localization_y = models.IntegerField()
     team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name="players_in_team")

@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import markdown
+
+print('Markdown module path', markdown.__file__)
+print('Markdown version:', markdown.version)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -39,7 +43,22 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core',
     'rest_framework',
+    # 'provider',
+    # 'provider.oauth2',
+    # 'oauth2_provider'
 ]
+
+REST_FRAMEWORK = {
+    # 'DEFAULT_PAGINATION_CLASS':
+    # 'rest_framework.pagination.limitOffsetPaginationWithMaxLimit',
+    # 'PAGE_SIZE': 5,
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        # 'rest_framework.authentication.BasicAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
+        # 'rest_framework.authentication.OAuth2Authentication',
+)
+
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

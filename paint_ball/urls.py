@@ -29,6 +29,8 @@ urlpatterns = [
     # path('admin/', admin.site.urls),
     path(r'admin/', admin.site.urls),
     url(r'^', include(router.urls)),
+    # url(r'^oauth2/', include('provider.oauth2.urls', namespace='oauth2')),
+    # url(r'^o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
 ]
 
 
