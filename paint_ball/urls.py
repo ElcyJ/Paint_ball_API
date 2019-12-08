@@ -24,6 +24,7 @@ router.register(r'players', PlayerViewSet, base_name='player')
 router.register(r'teams', TeamViewSet, base_name='team')
 router.register(r'guns', GunViewSet, base_name='gun')
 router.register(r'maps', MapViewSet, base_name='map')
+router.register(r'shots', ShotViewSet, base_name='shot')
 
 urlpatterns = [
     # path('admin/', admin.site.urls),

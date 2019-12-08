@@ -44,5 +44,52 @@ class PlayerViewSet(viewsets.ModelViewSet):
                         status=status.HTTP_400_BAD_REQUEST)
 
 
+class ShotViewSet(viewsets.ModelViewSet):
+    queryset = Shot.objects.all()
+    serializer_class = ShotSerializer
+
+    def create(self, request, *args, **kwargs):
+        shot_serializer = ShotSerializer(data=request.data)
+        if shot_serializer.is_valid():
+            player = Player.objects.get(name=request.data['player']['name'])
+            other_players = Player.objects.all()
+
+            if request.data['direction'] == 'D':
+                shot_range = player.localization_y - player.gun.range
+                for other_player in other_players:
+                    if shot_range <= other_player.localization_y <= player.localization_y:
+                        if player != other_player and player.team != other_player.team:
+                            self.perform_create(shot_serializer)
+                            Player.objects.get(name=other_player).delete()
+                            return Response({'status': 'You hit a target!'})
+
+            elif request.data['direction'] == 'U':
+                shot_range = player.localization_y + player.gun.range
+                for other_player in other_players:
+                    if shot_range >= other_player.localization_y >= player.localization_y:
+                        if player != other_player and player.team != other_player.team:
+                            self.perform_create(shot_serializer)
+                            Player.objects.get(name=other_player).delete()
+                            return Response({'status': 'You hit a target!'})
+
+            elif request.data['direction'] == 'R':
+                shot_range = player.localization_x + player.gun.range
+                for other_player in other_players:
+                    if shot_range >= other_player.localization_y >= player.localization_y:
+                        if player != other_player and player.team != other_player.team:
+                            self.perform_create(shot_serializer)
+                            Player.objects.get(name=other_player).delete()
+                            return Response({'status': 'You hit a target!'})
+
+            elif request.data['direction'] == 'L':
+                shot_range = player.localization_x - player.gun.range
+                for other_player in other_players:
+                    if shot_range <= other_player.localization_y <= player.localization_y:
+                        if player != other_player and player.team != other_player.team:
+                            self.perform_create(shot_serializer)
+                            Player.objects.get(name=other_player).delete()
+                            return Response({'status': 'You hit a target!'})
+
+            return Response({'status': 'You missed the target...'})
 
 

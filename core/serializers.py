@@ -51,11 +51,8 @@ class PlayerSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Player
         fields = ['url', 'name', 'localization_x', 'localization_y', 'team', 'gun']
-        extra_kwargs = {
-            'name': {'read_only': True},
-            'team': {'read_only': True},
-            'gun': {'read_only': True}
-        }
+        extra_kwargs = {'localization_x': {'required': False},
+                        'localization_y': {'required': False}}
 
     def to_internal_value(self, data):
         team = data.get('team')
@@ -94,6 +91,27 @@ class PlayerSerializer(serializers.HyperlinkedModelSerializer):
         player.save()
 
         return player
+
+    def update(self, instance, validated_data):
+        validated_data.pop('name', None)
+        validated_data.pop('team', None)
+        validated_data.pop('gun', None)
+        return super().update(instance, validated_data)
+
+
+class ShotSerializer(serializers.HyperlinkedModelSerializer):
+    player = PlayerSerializer(many=False)
+
+    class Meta:
+        model = Shot
+        fields = ['url', 'direction', 'player']
+
+    def create(self, validated_data):
+        shot = Shot(direction=validated_data['direction'])
+        shot.player = Player.objects.get(name=validated_data['player']['name'])
+        shot.save()
+
+        return shot
 
 
 

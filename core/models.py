@@ -37,7 +37,7 @@ class Player(models.Model):
     gun = models.ForeignKey(Gun, on_delete=models.CASCADE, related_name='players_with_gun')
 
     def __str__(self):
-        return self.name + " - Team: " + self.team
+        return self.name
 
 
 class Shot(models.Model):
