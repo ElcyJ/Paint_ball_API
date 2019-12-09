@@ -18,6 +18,8 @@ from django.urls import path
 from django.conf.urls import url, include
 from rest_framework import routers
 from core.views import *
+from rest_framework_jwt.views import obtain_jwt_token
+from rest_framework_jwt.views import refresh_jwt_token
 
 router = routers.DefaultRouter()
 router.register(r'players', PlayerViewSet, base_name='player')
@@ -30,9 +32,9 @@ urlpatterns = [
     # path('admin/', admin.site.urls),
     path(r'admin/', admin.site.urls),
     url(r'^', include(router.urls)),
-    # url(r'^oauth2/', include('provider.oauth2.urls', namespace='oauth2')),
-    # url(r'^o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
-]
+    url(r'^login/', obtain_jwt_token),
+    url(r'^refresh-token/', refresh_jwt_token),
 
+]
 
 urlpatterns = router.urls + urlpatterns

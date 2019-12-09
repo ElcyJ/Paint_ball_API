@@ -4,6 +4,7 @@ from .permissions import *
 from rest_framework import viewsets, status
 from .serializers import *
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 
 
 class MapViewSet(viewsets.ModelViewSet):
@@ -22,7 +23,7 @@ class GunViewSet(viewsets.ModelViewSet):
 
 
 class PlayerViewSet(viewsets.ModelViewSet):
-    # permission_classes = [IsUserOrReadyOnly]
+    permission_classes = [IsAuthenticated, IsUserOrReadyOnly]
 
     queryset = Player.objects.all()
     serializer_class = PlayerSerializer

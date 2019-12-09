@@ -43,19 +43,19 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core',
     'rest_framework',
-    # 'provider',
-    # 'provider.oauth2',
-    # 'oauth2_provider'
 ]
 
 REST_FRAMEWORK = {
     # 'DEFAULT_PAGINATION_CLASS':
     # 'rest_framework.pagination.limitOffsetPaginationWithMaxLimit',
     # 'PAGE_SIZE': 5,
+    'DEFAULT_PERMISSION_CLASSES': (
+            'rest_framework.permissions.BasePermission',
+            'rest_framework.permissions.IsAuthenticated',
+    ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        # 'rest_framework.authentication.BasicAuthentication',
-        # 'rest_framework.authentication.SessionAuthentication',
-        # 'rest_framework.authentication.OAuth2Authentication',
+        # 'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
 )
 
 }

@@ -74,12 +74,11 @@ class PlayerSerializer(serializers.HyperlinkedModelSerializer):
         return ret
 
     def create(self, validated_data):
-        user = User(
+        user = User.objects.create_user(
             username=validated_data['name'],
             email=validated_data['name'] + "@email.com",
             password=validated_data['name'] + "1234"
         )
-        user.save()
         player = Player(
             name=validated_data['name'],
             localization_x=validated_data['localization_x'],
