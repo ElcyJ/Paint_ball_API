@@ -8,22 +8,28 @@ from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnl
 
 
 class MapViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticatedOrReadOnly, IsAdminOrReadOnly]
+
     queryset = Map.objects.all()
     serializer_class = MapSerializer
 
 
 class TeamViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
     queryset = Team.objects.all()
     serializer_class = TeamSerializer
 
 
 class GunViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticatedOrReadOnly, IsAdminOrReadOnly]
+
     queryset = Gun.objects.all()
     serializer_class = GunSerializer
 
 
 class PlayerViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated, IsUserOrReadyOnly]
+    permission_classes = [IsAuthenticated, IsPlayerOrReadOnly]
 
     queryset = Player.objects.all()
     serializer_class = PlayerSerializer
@@ -46,6 +52,8 @@ class PlayerViewSet(viewsets.ModelViewSet):
 
 
 class ShotViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsPlayerOrReadOnly, IsAuthenticated]
+
     queryset = Shot.objects.all()
     serializer_class = ShotSerializer
 
@@ -92,5 +100,3 @@ class ShotViewSet(viewsets.ModelViewSet):
                             return Response({'status': 'You hit a target!'})
 
             return Response({'status': 'You missed the target...'})
-
-
