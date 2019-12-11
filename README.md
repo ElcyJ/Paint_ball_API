@@ -29,16 +29,16 @@ Select your team and choose your gun to get it started!
 ### Enpoints:
 
 * **Players** - http://localhost:8000/players/
-> Register players with a team and a gun.
-> You cannot change it later, just your localization.
+> * Register players with a team and a gun.
+> * You cannot change it later, just your localization.
 * **Maps** - http://localhost:8000/maps/
-> Visualize available maps.
-> Only a admin can create a map.
+> * Visualize available maps.
+> * Only a admin can create a map.
 * **Guns** - http://localhost:8000/guns/
-> Visualize available guns.
-> Only a admin can create a gun.
+> * Visualize available guns.
+> * Only a admin can create a gun.
 * **Teams** - http://localhost:8000/teams/
 > Visualize available teams or create yours.
 * **Shots** - http://localhost:8000/shots/
-> Select a direction and give a shot to hit someone from another team.
-> If you hit a player, this will be removed from the game .
+> * Select a direction and give a shot to hit someone from another team.
+> * If you hit a player, this will be removed from the game .
