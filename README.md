@@ -42,3 +42,6 @@ Select your team and choose your gun to get it started!
 * **Shots** - http://localhost:8000/shots/
 > * Select a direction and give a shot to hit someone from another team.
 > * If you hit a player, this will be removed from the game .
+
+### Link do vídeo de explicação:
+https://youtu.be/_EQhrUwCYAY
